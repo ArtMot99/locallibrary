@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 import uuid
+from django.contrib.auth.models import User
 
 
 class Genre(models.Model):
@@ -8,6 +9,16 @@ class Genre(models.Model):
     Модель для хранения жанра книги
     """
     name = models.CharField(max_length=200, help_text='Введите жанр книги')
+
+    def __str__(self):
+        return self.name
+
+
+class Language(models.Model):
+    """
+    Модель для представления языков книг
+    """
+    name = models.CharField(max_length=200, help_text='Введите оригинальный язык книги')
 
     def __str__(self):
         return self.name
@@ -27,6 +38,10 @@ class Book(models.Model):
     # ManyToManyField used because genre can contain many books. Books can cover many genres.
     # Genre class has already been defined so we can specify the object above.
     genre = models.ManyToManyField(Genre, help_text='Выберите жанр для данной книги')
+    language = models.ForeignKey('Language', on_delete=models.SET_NULL, null=True)
+
+    class Meta:
+        ordering = ['title', 'author']
 
     def __str__(self):
         """
@@ -58,6 +73,7 @@ class BookInstance(models.Model):
     # используется для данных due_back (при которых ожидается, что книга появится после заимствования или обслуживания).
     # Это значение может быть blank или null (необходимо, когда книга доступна)
     due_back = models.DateField(null=True, blank=True)
+    borrower = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
 
     LOAN_STATUS = (
         ('m', 'Maintenance'),
@@ -84,6 +100,9 @@ class Author(models.Model):
     last_name = models.CharField(max_length=100)
     date_of_birth = models.DateField(null=True, blank=True)
     date_of_death = models.DateField('Died', null=True, blank=True)
+
+    class Meta:
+        ordering = ['last_name', 'first_name']
 
     def get_absolute_url(self):
         """
