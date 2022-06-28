@@ -29,6 +29,7 @@ class BookInstanceAdmin(admin.ModelAdmin):
 
 class BookInstanceInline(admin.TabularInline):
     model = BookInstance
+    extra = 0
 
 
 # todo Выдает ошибку, когда пытаюсь добавить вывод жанра в админ панель.
