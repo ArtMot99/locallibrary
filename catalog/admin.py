@@ -3,8 +3,14 @@ from .models import Book, Genre, BookInstance, Author, Language
 
 
 # Регистриция моделей в админ панели
-admin.site.register(Genre)
-admin.site.register(Language)
+@admin.register(Genre)
+class GenreAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(Language)
+class LanguageAdmin(admin.ModelAdmin):
+    pass
 
 
 @admin.register(BookInstance)
@@ -31,3 +37,4 @@ class BookAdmin(admin.ModelAdmin):
 @admin.register(Author)
 class AuthorAdmin(admin.ModelAdmin):
     list_display = ('last_name', 'first_name', 'date_of_birth', 'date_of_death')
+    fields = ['first_name', 'last_name', ('date_of_birth', 'date_of_death')]
