@@ -27,10 +27,15 @@ class BookInstanceAdmin(admin.ModelAdmin):
     )
 
 
+class BookInstanceInline(admin.TabularInline):
+    model = BookInstance
+
+
 # todo Выдает ошибку, когда пытаюсь добавить вывод жанра в админ панель.
 @admin.register(Book)
 class BookAdmin(admin.ModelAdmin):
     list_display = ('title', 'author', 'language')  # 'display_genre'
+    inlines = [BookInstanceInline]
 
     # def display_genre(self):
     #     """
