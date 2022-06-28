@@ -13,12 +13,20 @@ class Genre(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name = 'Жанр'
+        verbose_name_plural = 'Жанры'
+
 
 class Language(models.Model):
     """
     Модель для представления языков книг
     """
     name = models.CharField(max_length=200, help_text='Введите оригинальный язык книги')
+
+    class Meta:
+        verbose_name = 'Язык'
+        verbose_name_plural = 'Языки'
 
     def __str__(self):
         return self.name
@@ -42,6 +50,8 @@ class Book(models.Model):
 
     class Meta:
         ordering = ['title', 'author']
+        verbose_name = 'Книга'
+        verbose_name_plural = 'Книги'
 
     def __str__(self):
         """
@@ -87,6 +97,8 @@ class BookInstance(models.Model):
 
     class Meta:
         ordering = ['due_back']
+        verbose_name = 'Книжный экземпляр'
+        verbose_name_plural = 'Книжные экземпляры'
 
     def __str__(self):
         return f'{self.id} ({self.book.title})'
@@ -103,6 +115,8 @@ class Author(models.Model):
 
     class Meta:
         ordering = ['last_name', 'first_name']
+        verbose_name = 'Автор'
+        verbose_name_plural = 'Авторы'
 
     def get_absolute_url(self):
         """
