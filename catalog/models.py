@@ -67,7 +67,7 @@ class Book(models.Model):
 
         :return:
         """
-        return reverse('book_detail', args=[str(self.id)])
+        return reverse('book-detail', args=[str(self.id)])
 
 
 class BookInstance(models.Model):
