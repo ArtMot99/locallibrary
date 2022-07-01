@@ -126,3 +126,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Redirect to home URL after login (Default redirects to /accounts/profile/)
 LOGIN_REDIRECT_URL = '/'
+
+#  Это регистрирует любые письма, отправленные на консоль
+#  (чтобы вы могли скопировать ссылку на сброс пароля с консоли)
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
