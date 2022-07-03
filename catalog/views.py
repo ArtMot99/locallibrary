@@ -54,6 +54,7 @@ class AuthorDetailView(LoginRequiredMixin, generic.DetailView):
     model = Author
 
 
+# todo при logout возникает 404.
 class LoanedBooksByUserListView(LoginRequiredMixin, generic.ListView):
     """
     Generic class-based view listing books on loan to current user.
@@ -66,6 +67,7 @@ class LoanedBooksByUserListView(LoginRequiredMixin, generic.ListView):
         return BookInstance.objects.filter(borrower=self.request.user).filter(status__exact='o').order_by('due_back')
 
 
+# todo при logout возникает 404.
 class LoanedBooksByStaffListView(LoginRequiredMixin, generic.ListView):
     model = BookInstance
     template_name = 'catalog/bookinstance_list_borrowed_staff.html'
