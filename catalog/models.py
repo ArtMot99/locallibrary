@@ -100,6 +100,7 @@ class BookInstance(models.Model):
         ordering = ['due_back']
         verbose_name = 'Книжный экземпляр'
         verbose_name_plural = 'Книжные экземпляры'
+        permissions = (("can_mark_returned", "Set book as returned"),)
 
     def __str__(self):
         return f'{self.id} ({self.book.title})'
