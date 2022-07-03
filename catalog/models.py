@@ -2,6 +2,7 @@ from django.db import models
 from django.urls import reverse
 import uuid
 from django.contrib.auth.models import User
+from datetime import date
 
 
 class Genre(models.Model):
@@ -102,6 +103,12 @@ class BookInstance(models.Model):
 
     def __str__(self):
         return f'{self.id} ({self.book.title})'
+
+    @property
+    def is_overdue(self):
+        if self.due_back and date.today() > self.due_back:
+            return True
+        return False
 
 
 class Author(models.Model):
