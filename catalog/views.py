@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import Book, BookInstance, Author, Genre
 from django.views import generic
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 def index(request):
@@ -39,7 +40,8 @@ class BookListView(generic.ListView):
     paginate_by = 10
 
 
-class BookDetailView(generic.DetailView):
+class BookDetailView(LoginRequiredMixin, generic.DetailView):
+    login_url = '/catalog/accounts/login'
     model = Book
 
 
@@ -47,6 +49,7 @@ class AuthorListView(generic.ListView):
     model = Author
 
 
-class AuthorDetailView(generic.DetailView):
+class AuthorDetailView(LoginRequiredMixin, generic.DetailView):
+    login_url = '/catalog/accounts/login'
     model = Author
 
