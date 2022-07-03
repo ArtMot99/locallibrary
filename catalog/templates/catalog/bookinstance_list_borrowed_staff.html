@@ -5,16 +5,12 @@
 
     {% if bookinstance_list %}
     <ul>
-
       {% for bookinst in bookinstance_list %}
-      <li class="{% if bookinst.is_overdue %}text-danger{% endif %}">
-      {% if bookinst.book.pk %}
-        <a href="{% url 'book-detail' bookinst.book.pk %}">{{bookinst.book.title}}</a> ({{ bookinst.due_back }})
-          - {{ bookinst.borrower }}
-      {% else %}
-        <p>None</p>
+      {% if bookinst.book.title %}
+          <li class="{% if bookinst.is_overdue %}text-danger{% endif %}">
+          <a href="{% url 'book-detail' bookinst.book.pk %}">{{bookinst.book.title}}</a> ({{ bookinst.due_back }})
+            - {{ bookinst.borrower }}</li>
       {% endif %}
-      </li>
       {% endfor %}
     </ul>
 
